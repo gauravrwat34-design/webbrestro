@@ -1,0 +1,43 @@
+// 🔹 HERO SLIDER
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+
+document.getElementById("next").onclick = () => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+};
+
+document.getElementById("prev").onclick = () => {
+    slides[index].classList.remove("active");
+    index = (index - 1 + slides.length) % slides.length;
+    slides[index].classList.add("active");
+};
+
+// 🔹 SCROLL BUTTON
+document.getElementById("scrollBtn").onclick = () => {
+    window.scrollTo({
+        top: window.innerHeight,
+        behavior: "smooth"
+    });
+};
+
+// 🔥 MAIN SCROLL ANIMATION
+window.addEventListener("scroll", () => {
+
+    let section = document.querySelector(".scroll-section");
+
+    let scrollTop = window.scrollY;
+    let sectionTop = section.offsetTop;
+    let sectionHeight = section.offsetHeight;
+
+    let progress = (scrollTop - sectionTop) / sectionHeight;
+    progress = Math.max(0, Math.min(1, progress));
+
+    // circle grow
+    let scale = progress * 25;
+
+    document.getElementById("circle").style.transform =
+        `translate(-50%, -50%) scale(${scale})`;
+
+});
